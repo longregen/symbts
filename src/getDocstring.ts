@@ -6,9 +6,9 @@ export function getDocstring(node: ts.Node): string | undefined {
       .filter(doc => doc.kind === ts.SyntaxKind.JSDoc)
       .map(doc => (doc as ts.JSDoc).comment || '')
       .join('\n')
-      .trim();
+      .trim()
   }
 
-  return undefined;
+  return undefined
 }
 

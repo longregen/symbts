@@ -1,5 +1,5 @@
 import { classDefinition } from './classDefinition'
-import ts from 'typescript';
+import ts from 'typescript'
 import { expect } from 'chai'
 
 describe('classDefinition', () => {
@@ -10,11 +10,11 @@ describe('classDefinition', () => {
       ts.ScriptTarget.Latest,
       true,
       ts.ScriptKind.TS
-    );
-    const classDecl = sourceFile.statements[0] as ts.ClassDeclaration;
-    const definition = classDefinition(classDecl);
-    expect(definition).to.equal('class TestClass');
-  });
+    )
+    const classDecl = sourceFile.statements[0] as ts.ClassDeclaration
+    const definition = classDefinition(classDecl)
+    expect(definition).to.equal('class TestClass')
+  })
 
   it('should return the correct definition for a class with inheritance', () => {
     const sourceFile = ts.createSourceFile(
@@ -23,9 +23,9 @@ describe('classDefinition', () => {
       ts.ScriptTarget.Latest,
       true,
       ts.ScriptKind.TS
-    );
-    const classDecl = sourceFile.statements[0] as ts.ClassDeclaration;
+    )
+    const classDecl = sourceFile.statements[0] as ts.ClassDeclaration
     const definition = classDefinition(classDecl)
     expect(definition).to.equal('class TestClass extends BaseClass')
-  });
-});
+  })
+})

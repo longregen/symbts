@@ -5,7 +5,7 @@ export function match(name: string, symbols: string[]): boolean {
     return false
   }
 
-  for (let search of symbols) {
+  for (const search of symbols) {
     if (!search.includes('*')) {
       // Exact matches only
       if (name === search) {

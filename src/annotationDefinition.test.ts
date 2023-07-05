@@ -1,5 +1,5 @@
-import ts from 'typescript';
-import { annotationDefinition } from './annotationDefinition';
+import ts from 'typescript'
+import { annotationDefinition } from './annotationDefinition'
 import { expect } from 'chai'
 
 describe('annotationDefinition', () => {
@@ -10,13 +10,13 @@ describe('annotationDefinition', () => {
       ts.ScriptTarget.Latest,
       true,
       ts.ScriptKind.TS
-    );
-    const variableStatement = sourceFile.statements[0] as ts.VariableStatement;
-    const variableDeclaration = variableStatement.declarationList.declarations[0];
-    const type = variableDeclaration.type;
-    const definition = annotationDefinition(type);
-    expect(definition).to.equal('string');
-  });
+    )
+    const variableStatement = sourceFile.statements[0] as ts.VariableStatement
+    const variableDeclaration = variableStatement.declarationList.declarations[0]
+    const type = variableDeclaration.type
+    const definition = annotationDefinition(type)
+    expect(definition).to.equal('string')
+  })
 
   it('should return the correct definition for an array type', () => {
     const sourceFile = ts.createSourceFile(
@@ -25,13 +25,13 @@ describe('annotationDefinition', () => {
       ts.ScriptTarget.Latest,
       true,
       ts.ScriptKind.TS
-    );
-    const variableStatement = sourceFile.statements[0] as ts.VariableStatement;
-    const variableDeclaration = variableStatement.declarationList.declarations[0];
-    const type = variableDeclaration.type;
-    const definition = annotationDefinition(type);
-    expect(definition).to.equal('number[]');
-  });
+    )
+    const variableStatement = sourceFile.statements[0] as ts.VariableStatement
+    const variableDeclaration = variableStatement.declarationList.declarations[0]
+    const type = variableDeclaration.type
+    const definition = annotationDefinition(type)
+    expect(definition).to.equal('number[]')
+  })
 
   it('should return the correct definition for a tuple type', () => {
     const sourceFile = ts.createSourceFile(
@@ -40,11 +40,11 @@ describe('annotationDefinition', () => {
       ts.ScriptTarget.Latest,
       true,
       ts.ScriptKind.TS
-    );
-    const variableStatement = sourceFile.statements[0] as ts.VariableStatement;
-    const variableDeclaration = variableStatement.declarationList.declarations[0];
-    const type = variableDeclaration.type;
-    const definition = annotationDefinition(type);
-    expect(definition).to.equal('[string, number]');
-  });
-});
+    )
+    const variableStatement = sourceFile.statements[0] as ts.VariableStatement
+    const variableDeclaration = variableStatement.declarationList.declarations[0]
+    const type = variableDeclaration.type
+    const definition = annotationDefinition(type)
+    expect(definition).to.equal('[string, number]')
+  })
+})
