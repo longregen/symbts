@@ -13,7 +13,7 @@ export function processDirectory(dir: string, lookForSymbols: string[], options:
     const filePath = path.join(dir, file.name)
     if (file.isDirectory()) {
       processDirectory(filePath, lookForSymbols, options, program)
-    } else if (filePath.endsWith('.ts')) {
+    } else if (filePath.endsWith('.ts') || filePath.endsWith('.tsx')) {
       processFile(filePath, lookForSymbols, options, program)
     }
   })

@@ -5,7 +5,7 @@ import { processDirectory } from './processDirectory'
 
 export const program = new Command()
 function getTsProgram() {
-  const configPath = ts.findConfigFile('./', ts.sys.fileExists, 'tsconfig.json')
+  const configPath = ts.findConfigFile(process.env.PWD || './', ts.sys.fileExists, 'tsconfig.json')
   if (!configPath) {
     return ts.createProgram({ rootNames: [], options: {} })
   }
