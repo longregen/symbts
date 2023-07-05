@@ -19,7 +19,7 @@ export function getSymbolString(filePath: string, option: any, sourceFile: ts.So
     if (option.docstring && docstring) {
       result += docstring
     }
-    if (option.signature) {
+    if (option.onlySignature) {
       result += signature
     } else {
       result += codeForNode(symbol, sourceFile)[0]

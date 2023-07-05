@@ -16,12 +16,18 @@ function getTsProgram() {
 
 program
   .version('1.0.0')
+  .name('symbts')
   .arguments('<symbols>')
   .option('-d, --directory <directory>', 'Directories to search', (val: any, dirs) => dirs.concat(val), [])
   .option('-x, --exclude <dir>', 'Directories to exclude', (val: any, dirs) => dirs.concat(val), [])
-  .option('-s, --signatures', 'Show just function and class signatures')
-  .option('-n, --no-file', "Don't include the # File: comments in the output")
+  .option('-s, --only-signature', 'Show just function and class signatures', false)
+  .option('-n, --no-file', "Don't include the # File: comments in the output", false)
+  .showHelpAfterError()
   .action((symbols, option) => {
+    if (!symbols) {
+      console.log(program.help())
+      return
+    }
     option.exclude = option.exclude.concat(['node_modules', '.git'])
     const directories = option.directory.length ? option.directory : ['.']
     directories.forEach((dir: string) => processDirectory(
