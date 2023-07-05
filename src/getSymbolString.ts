@@ -22,7 +22,7 @@ export function getSymbolString(filePath: string, option: any, sourceFile: ts.So
     if (option.signature) {
       result += signature
     } else {
-      result += signature + '\n' + codeForNode(symbol, sourceFile)
+      result += codeForNode(symbol, sourceFile)[0]
     }
   }
   return result

@@ -24,7 +24,12 @@ program
   .action((symbols, option) => {
     option.exclude = option.exclude.concat(['node_modules', '.git'])
     const directories = option.directory.length ? option.directory : ['.']
-    directories.forEach((dir: string) => processDirectory(dir, symbols, option, getTsProgram()))
+    directories.forEach((dir: string) => processDirectory(
+      dir,
+      typeof symbols === 'string' ? [ symbols ] : symbols,
+      option,
+      getTsProgram()
+    ))
   })
 
 program.parse(process.argv)

@@ -11,7 +11,6 @@ export function processDirectory(dir: string, lookForSymbols: string[], options:
 
   fs.readdirSync(dir, { withFileTypes: true }).forEach((file: { isDirectory: any, name: string }) => {
     const filePath = path.join(dir, file.name)
-    console.log(`enter ${filePath}`)
     if (file.isDirectory()) {
       processDirectory(filePath, lookForSymbols, options, program)
     } else if (filePath.endsWith('.ts')) {

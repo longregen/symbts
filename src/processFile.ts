@@ -1,11 +1,10 @@
 import ts from 'typescript'
-import { checkAndPrintSymbol } from './checkAndPrintSymbol'
 import { getSourceFile } from './getSourceFile'
+import { getSymbolString } from './getSymbolString'
+import { simpleMatch } from './simpleMatch'
 
 export function processFile(filePath: string, lookForSymbols: string[], options: any, program: ts.Program) {
   const sourceFile = getSourceFile(filePath, program)
-  console.log(`enter ${filePath}, source file is`, sourceFile)
-
   if (!sourceFile) {
     console.error(`Unexpected empty sourceFile: ${filePath}}`)
     return
@@ -14,9 +13,16 @@ export function processFile(filePath: string, lookForSymbols: string[], options:
     if (!node) {
       return
     }
-    const text = node.getFullText()
-    if (lookForSymbols.includes(text)) {
-      checkAndPrintSymbol(node)
+    if (ts.isFunctionDeclaration(node) || ts.isClassDeclaration(node)) {
+      try {
+        const text = node.name?.escapedText || ''
+        if (lookForSymbols.map(pattern => simpleMatch(text, pattern)).reduce((a, b) => a || b, false)) {
+          console.log(getSymbolString(filePath, options, sourceFile, node, program))
+        }
+      } catch (e) {
+        console.log(node)
+        throw e
+      }
     } else {
       ts.forEachChild(node, analyze)
     }
