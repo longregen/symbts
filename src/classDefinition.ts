@@ -1,9 +1,9 @@
 import ts from 'typescript'
 
-export function classDefinition(classNode: ts.ClassDeclaration): string {
-  const className = classNode.name?.getText() || 'anonymous'
-  const heritageClause = classNode.heritageClauses?.[0]
-  const extendsClass = heritageClause?.types?.[0]?.expression.getText() || ''
-  const extendsKeyword = extendsClass ? ` extends ${extendsClass}` : ''
-  return `class ${className}${extendsKeyword}`
+export function classDefinition(classDef: ts.ClassDeclaration): string {
+  const baseClasses = classDef.heritageClauses?.find(clause => clause.token === ts.SyntaxKind.ExtendsKeyword)
+    ?.types.map(expr => expr.expression.getText()) || []
+  const baseClassesStr = baseClasses.join(', ')
+
+  return `class ${classDef.name?.text}${baseClassesStr ? ` extends ${baseClassesStr}` : ''}`
 }
