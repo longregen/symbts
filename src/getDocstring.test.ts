@@ -1,5 +1,6 @@
 import ts from 'typescript'
 import { getDocstring } from './getDocstring'
+import { expect } from 'chai'
 
 describe('getDocstring', () => {
   it('should return the docstring of a function', () => {
@@ -13,7 +14,7 @@ describe('getDocstring', () => {
     const func = sourceFile.statements[0] as ts.FunctionDeclaration;
 
     const docstring = getDocstring(func);
-    expect(docstring).toBe('This is a test function.');
+    expect(docstring).to.equal('This is a test function.');
   });
 
   it('should return undefined if a function has no docstring', () => {
@@ -23,6 +24,6 @@ describe('getDocstring', () => {
     const func = sourceFile.statements[0] as ts.FunctionDeclaration;
 
     const docstring = getDocstring(func);
-    expect(docstring).toBeUndefined();
+    expect(docstring).to.be.undefined
   });
 });

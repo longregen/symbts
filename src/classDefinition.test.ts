@@ -1,5 +1,6 @@
 import { classDefinition } from './classDefinition'
 import ts from 'typescript';
+import { expect } from 'chai'
 
 describe('classDefinition', () => {
   it('should return the correct definition for a class with no inheritance', () => {
@@ -12,7 +13,7 @@ describe('classDefinition', () => {
     );
     const classDecl = sourceFile.statements[0] as ts.ClassDeclaration;
     const definition = classDefinition(classDecl);
-    expect(definition).toBe('class TestClass');
+    expect(definition).to.equal('class TestClass');
   });
 
   it('should return the correct definition for a class with inheritance', () => {
@@ -25,6 +26,6 @@ describe('classDefinition', () => {
     );
     const classDecl = sourceFile.statements[0] as ts.ClassDeclaration;
     const definition = classDefinition(classDecl)
-    expect(definition).toBe('class TestClass extends BaseClass')
+    expect(definition).to.equal('class TestClass extends BaseClass')
   });
 });

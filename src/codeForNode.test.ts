@@ -1,6 +1,7 @@
 import ts from 'typescript'
 import { codeForNode } from './codeForNode'
 import { findSymbolNodes } from './findSymbolNodes'
+import { expect } from 'chai'
 
 describe('codeForNode', () => {
   it('should return the code for a node', () => {
@@ -13,7 +14,7 @@ describe('codeForNode', () => {
     const [nodeCode, line] = codeForNode(nodes[0], sourceFile)
 
     // Assert that we got the correct code and line number
-    expect(nodeCode.trim()).toBe('class MyClass {\n    myMethod() {}\n}')
-    expect(line).toBe(1)
+    expect(nodeCode.trim()).to.equal('class MyClass {\n    myMethod() {}\n}')
+    expect(line).to.equal(1)
   })
 })

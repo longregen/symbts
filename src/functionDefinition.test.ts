@@ -1,5 +1,6 @@
 import ts from 'typescript'
 import { functionDefinition } from '../src/functionDefinition'
+import { expect } from 'chai'
 
 describe('functionDefinition', () => {
   it('should return the correct definition for a function with no parameters or return type', () => {
@@ -8,7 +9,7 @@ describe('functionDefinition', () => {
     const typeChecker = getTypeCheckerForSourceFile(sourceFile);
     const func = sourceFile.statements[0] as ts.FunctionDeclaration;
     const definition = functionDefinition(typeChecker, func);
-    expect(definition).toBe('function testFunc()');
+    expect(definition).to.equal('function testFunc()');
   });
 
   it('should return the correct definition for a function with multiple parameters', () => {
@@ -17,7 +18,7 @@ describe('functionDefinition', () => {
     const typeChecker = getTypeCheckerForSourceFile(sourceFile);
     const func = sourceFile.statements[0] as ts.FunctionDeclaration;
     const definition = functionDefinition(typeChecker, func);
-    expect(definition).toBe('function testFunc(arg1: string, arg2: number)');
+    expect(definition).to.equal('function testFunc(arg1: string, arg2: number)');
   });
 
   it('should return the correct definition for a function with a return type', () => {
@@ -26,7 +27,7 @@ describe('functionDefinition', () => {
     const typeChecker = getTypeCheckerForSourceFile(sourceFile);
     const func = sourceFile.statements[0] as ts.FunctionDeclaration;
     const definition = functionDefinition(typeChecker, func);
-    expect(definition).toBe('function testFunc(): string');
+    expect(definition).to.equal('function testFunc(): string');
   });
 
   it('should return the correct definition for a function with a complex return type', () => {
@@ -35,7 +36,7 @@ describe('functionDefinition', () => {
     const typeChecker = getTypeCheckerForSourceFile(sourceFile);
     const func = sourceFile.statements[0] as ts.FunctionDeclaration;
     const definition = functionDefinition(typeChecker, func);
-    expect(definition).toBe('function testFunc(): number[]');
+    expect(definition).to.equal('function testFunc(): number[]');
   });
 
   function createSourceFile(sourceCode: string): ts.SourceFile {

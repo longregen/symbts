@@ -1,10 +1,8 @@
 import ts from 'typescript';
 import { annotationDefinition } from './annotationDefinition';
+import { expect } from 'chai'
 
 describe('annotationDefinition', () => {
-  const program = ts.createProgram({ rootNames: [], options: {} });
-  const checker = program.getTypeChecker();
-
   it('should return the correct definition for a basic type', () => {
     const sourceFile = ts.createSourceFile(
       'test.ts',
@@ -17,7 +15,7 @@ describe('annotationDefinition', () => {
     const variableDeclaration = variableStatement.declarationList.declarations[0];
     const type = variableDeclaration.type;
     const definition = annotationDefinition(type);
-    expect(definition).toBe('string');
+    expect(definition).to.equal('string');
   });
 
   it('should return the correct definition for an array type', () => {
@@ -32,7 +30,7 @@ describe('annotationDefinition', () => {
     const variableDeclaration = variableStatement.declarationList.declarations[0];
     const type = variableDeclaration.type;
     const definition = annotationDefinition(type);
-    expect(definition).toBe('number[]');
+    expect(definition).to.equal('number[]');
   });
 
   it('should return the correct definition for a tuple type', () => {
@@ -47,6 +45,6 @@ describe('annotationDefinition', () => {
     const variableDeclaration = variableStatement.declarationList.declarations[0];
     const type = variableDeclaration.type;
     const definition = annotationDefinition(type);
-    expect(definition).toBe('[string, number]');
+    expect(definition).to.equal('[string, number]');
   });
 });

@@ -1,5 +1,6 @@
-import ts from 'typescript';
-import { addDocstring } from './addDocstring';
+import ts from 'typescript'
+import { addDocstring } from './addDocstring'
+import { expect } from 'chai'
 
 describe('addDocstring', () => {
   const testFunc = `/**
@@ -24,13 +25,13 @@ function testFunc() {}`;
   const result = addDocstring(testFunc, func, true, false);
 
   const expected = `/**\n * This is a test function\n */\nfunction testFunc() {}`;
-  expect(result).toBe(expected);
+  expect(result).to.equal(expected);
 });
 
 
   it('should not append the docstring if docstrings are disabled', () => {
     const result = addDocstring('function testFunc()', functionNode, false, false);
-    expect(result).toBe('function testFunc()');
+    expect(result).to.equal('function testFunc()');
   });
 
   it('should indent the docstring correctly for methods', () => {
@@ -39,7 +40,7 @@ function testFunc() {}`;
         /**
          * This is a test function
          */`;
-    expect(result).toBe(expected);
+    expect(result).to.equal(expected);
   });
 
   it('should not append anything if there is no docstring', () => {
@@ -53,7 +54,7 @@ function testFunc() {}`;
       ts.factory.createBlock([]), // body
     );
     const result = addDocstring('function testFunc()', noDocFunc, true, false);
-    expect(result).toBe('function testFunc()');
+    expect(result).to.equal('function testFunc()');
   });
 });
 

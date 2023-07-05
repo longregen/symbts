@@ -1,4 +1,5 @@
 import { findSymbolNodes } from './findSymbolNodes'
+import { expect } from 'chai'
 
 describe('findSymbolNodes', () => {
     it('should find nodes with specified symbols', () => {
@@ -14,6 +15,6 @@ describe('findSymbolNodes', () => {
         const nodes = findSymbolNodes(code, symbols)
 
         // Assert that we found the correct number of nodes
-        expect(nodes.length).toBe(symbols.length)
+        expect(nodes.length).to.equal(symbols.length)
     })
 })
